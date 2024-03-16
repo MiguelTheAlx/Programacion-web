@@ -14,22 +14,30 @@ import Registro from './components/Registro.jsx';
 import './App.css'
 
 function App() {
-  const [count, setCount] = useState(0)
   
-  const [selectedItem, setSelectedItem] = useState('Registro Libros');
+  const [selectedItem, setSelectedItem] = useState('Registro Libros'); //Estado para selecionar la pagina
+  const {open, setOpen} = useState(false);
+
+  const [datosEnviados, setDatosEnviados] = useState(null); // Estado para almacenar los datos
+
+  const handleDatosEnviados = (data) => {
+    setDatosEnviados(data);
+  };
+
 
   return (
     <>
       
       <div className='h-screen grid place-items-center bg-[#FDFEFE] pt-0'>
+      
           
           <Card color="transparent" shadow={true} className=' bg-[#EAFBFB] p-0  pb-7 pl-7 pr-7 transition-all duration-700 '>
             <NavList className='rounded-md' selectedItem={selectedItem} setSelectedItem={setSelectedItem}/>
             {selectedItem === 'Registro Libros' && (
-              <Registro/>
+              <Registro onDatosEnviados={handleDatosEnviados}/>
             )}
             {selectedItem === 'Listado libros' && (
-              <Listado />
+              <Listado datosEnviados={datosEnviados}/>
             )}
               
         </Card>

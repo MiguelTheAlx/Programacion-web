@@ -1,10 +1,6 @@
 import {React  } from "react";
   import { PencilIcon } from "@heroicons/react/24/solid";
   import {
-    ArrowDownTrayIcon,
-    MagnifyingGlassIcon,
-  } from "@heroicons/react/24/outline";
-  import {
     Card,
     CardHeader,
     Typography,
@@ -17,9 +13,8 @@ import {React  } from "react";
     Tooltip,
     Input,
   } from "@material-tailwind/react";  
-import { useForm, Controller } from "react-hook-form"
 
-function Listado(){
+function Listado({datosEnviados}){
     const TABLE_HEAD = ["Libros", "Editorial", "Publicación", "Genero", "Datos Autor", ""];
     
     const TABLE_ROWS = [
@@ -33,28 +28,9 @@ function Listado(){
         accountNumber: "1234",
         expiry: "06/2026",
     },
-    {
-        img: "https://www.inestemple.com/wp-content/uploads/2023/04/img-1207.jpg",
-        name: "Amazon",
-        amount: "$5,000",
-        date: "Wed 1:00pm",
-        status: "paid",
-        account: "master-card",
-        accountNumber: "1234",
-        expiry: "06/2026",
-    },
-    {
-        img: "https://marketplace.canva.com/EAFQ6QRNlEU/1/0/1003w/canva-car%C3%A1tula-de-libros-de-ciencia-ficci%C3%B3n-verde-y-rosa-D45iCPGnKec.jpg",
-        name: "Pinterest",
-        amount: "$3,400",
-        date: "Mon 7:40pm",
-        status: "pending",
-        account: "master-card",
-        accountNumber: "1234",
-        expiry: "06/2026",
-    },
     
     ];
+
 
     return(
     <>

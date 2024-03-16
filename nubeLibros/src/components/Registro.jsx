@@ -15,20 +15,40 @@ function Registro() {
   //funciones de react-hoock-form
   const { control, handleSubmit, reset, formState: {errors}, } = useForm({})
 
+
   const onSubmit = (data) => {
     //validacion de datos de fecha de fallecimiento
     data.FechaF = data.FechaF ? data.FechaF : 'Sin fecha existente';
-    console.log(data);//envio de datos al formulario
+    
+    const datosEnviados = {
+      "Portada": data.Imagen,
+      "Titulo": data.Titulo,
+      "Editorial": data.Editorial,
+      "Publicación": data.Genero,
+      "Datos Autor": {
+        "Autor": [data.Nombres, data.Apellidos],
+        "Fecha Nacimiento": data.FechaN,
+        "Fecha Falleciento": data.FechaF
+      }
+    };
+
+    props.onDatosEnviados(datosEnviados);//Sele pasa al estado Padre
+    
+    // Envío de datos al formulario
+    console.log(datosEnviados);
   }
   
 
   
     const [imageSelected, setImageSelected] = useState(false);
+    const [imageURL, setImageURL] = useState(""); // Estado para almacenar la URL de la imagen
+
 
     const handleImageSelect = (event) => {
       const file = event.target.files[0];
       console.log(file.type);
       setImageSelected(!!file);
+      setImageURL(URL.createObjectURL(file)); // Almacena la URL de la imagen
       return file;
     };
     
@@ -41,6 +61,7 @@ function Registro() {
         <form 
           className='nv-4 w-[500px] grid grid-cols-2 gap-6'
           onSubmit={handleSubmit(onSubmit)} >
+
 
             <div className="flex flex-col align-middle justify-evenly">
               <div className='p-2'>
@@ -268,7 +289,7 @@ function Registro() {
 
                                  </span> <br/>
                                  
-                                  {imageSelected? '': 'o'}
+                                  {imageSelected? <img src={imageURL} alt='Iamgen subida' className='w-full h-auto max-h-40'/>: 'o'}
                                   
                                  <br/>{imageSelected? '':'Arrastra y Suelta'}</p>
                                 <p class="text-xs text-gray-500 dark:text-gray-400 text-center"> {imageSelected? '':'PNG, JPG (MAX. 800x400px)'}</p>
